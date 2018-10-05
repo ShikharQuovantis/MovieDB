@@ -5,6 +5,7 @@ import {
 import Search from './Search/Search.js'
 
 import { createStackNavigator } from 'react-navigation';
+import MovieDetails from './MovieDetails/MovieDetails.js'
 
 console.disableYellowBox = true
 
@@ -19,13 +20,14 @@ export default class MovieDB extends Component {
 
 const RootStack = createStackNavigator({
     Search: Search,
+    MovieDetails: MovieDetails,
   },{
     initialRouteName: 'Search',
-    
+    /*FF316D*/
     navigationOptions: {
       title: 'Movies',
       headerStyle: {
-        backgroundColor: '#061c23',
+        backgroundColor: '#e74c3c',
       },
       headerTintColor: '#fff',
       headerTitleStyle: {

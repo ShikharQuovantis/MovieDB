@@ -19,6 +19,8 @@ import {getMoviesFromApiAsync} from '../api/apiManager.js';
 import {API_CONSTANTS} from '../api/apiConstants.js';
 import { SuperGridSectionList } from 'react-native-super-grid';
 import SegmentControl from 'react-native-segment-controller';
+import SegmentedControlTab from 'react-native-segmented-control-tab'
+
 
 const SEARCH_ICON_SRC = require('../Resources/images/search.png')
 const empty_search_string = " "
@@ -55,15 +57,17 @@ export default class Search extends Component {
             </TextInput>
           </View>
           <View style = {styles.segmentContainer}>
-            <SegmentedControlIOS
-              values={['Rating', 'Year']}
-              selectedIndex={this.state.selectedIndex}
-              tintColor = '#061c23'
-              onChange={(event) => {
-                this.setState({selectedSegmentIndex: event.nativeEvent.selectedSegmentIndex});
-                /*this.refreshList(this.state.keyword)*/
-              }}
-            />
+            <SegmentControl
+                values={['Ratings','Year']}
+                badges={[]}
+                selectedIndex={this.state.selectedSegmentIndex}
+                height={30}
+                onTabPress={this.handleIndexChange}
+                borderRadius={5}
+                tabStyle = {styles.tabStyle}
+                activeTabStyle = {styles.activeTabStyle}
+                tabTextStyle = {styles.tabTextStyle}
+              />
           </View>
         </View>
             <ScrollView>
@@ -73,13 +77,23 @@ export default class Search extends Component {
 
 
       );
-  }
+    }
+
+    handleIndexChange = (index) => {
+      /* this is done here because set state is asynchronous and we need to wait for the callback to finish*/
+      this.setState({
+        selectedSegmentIndex: index,
+      }, () => {
+        this.refreshList(this.state.keyword)
+      })
+    }
 
     refreshList = (keyword) => {
       const self = this
       if (keyword.trim() == "") {
       /* no movies, in case the search string is empty */
       keyword = empty_search_string
+
     }
 
     self.setState({keyword})
@@ -87,8 +101,7 @@ export default class Search extends Component {
   }
 
   viewItems = (item) => {
-
-      return(this.renderGrid(item));
+    return(this.renderGrid(item));
   }
 
   showMovieList(){
@@ -99,28 +112,35 @@ export default class Search extends Component {
 
   renderGrid(item){
 
-     return (<SuperGridSectionList
-
-       sections={[item]}
-       style={styles.gridView}
-       renderItem={({ item }) => (
-         <View style={[styles.containerImage, { backgroundColor: 'transparent' }]}>
-            <Image source={{uri: API_CONSTANTS.POSTER_PATH_BASE_URL + item[API_CONSTANTS.POSTER_PATH]}} style={styles.imageItself}/>
-            <Text style = {styles.textAbove} numberOfLines= {1}>
-              {item[API_CONSTANTS.TITLE]}
-            </Text>
-         </View>
-       )}
-       renderSectionHeader={({ section }) => (
-         <Text style={{ color: 'green', padding: 10, fontSize:15, fontWeight:'500', backgroundColor:'#061c23', marginBottom:10 }}>{section.title}</Text>
-       )}
+     return (
+       <SuperGridSectionList
+          sections={[item]}
+          style={styles.gridView}
+          renderItem={({ item }) => (
+            <TouchableHighlight
+              underlayColor='rgba(73,182,77,1,0.9)'
+              onPress={() => this.onRowTap(item)}>
+              <View style={[styles.containerImage, { backgroundColor: 'transparent' }]}>
+                <Image source={{uri: API_CONSTANTS.POSTER_PATH_BASE_URL + item[API_CONSTANTS.POSTER_PATH]}} style={styles.imageItself}/>
+                <Text style = {styles.textAbove} numberOfLines= {1}>
+                {item[API_CONSTANTS.TITLE]}
+                </Text>
+              </View>
+            </TouchableHighlight>
+          )}
+          renderSectionHeader={({ section }) => (
+            <Text style={styles.sectionHeader}>{section.title}</Text>
+          )}
        />)
+     }
 
+    onRowTap = (item) => {
+      this.props.navigation.navigate('MovieDetails', item)
     }
   /*<Text style={styles.itemName}>{item.name}</Text>
   <Text style={styles.itemCode}>{item.code}</Text>*/
 
-  renderRow = ({item}) => {
+  /*renderRow = ({item}) => {
     return (
 			<View style={styles.cardContainer}>
 
@@ -150,8 +170,6 @@ export default class Search extends Component {
 
 			</View>
 		);
-  }
-  onRowTap = (item) => {
+  }*/
 
-  }
 }

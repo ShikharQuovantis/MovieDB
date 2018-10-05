@@ -15,34 +15,36 @@ export const styles = StyleSheet.create({
   searchIcon:{
     width:20,
     height:20,
-    marginTop:7
+    marginTop:7,
   },
   searchFieldContainer:{
+    /*#6F1E51*/
     height: 40,
-    borderColor: 'gray',
+    borderColor: '#e74c3c',
     paddingTop:3,
     paddingLeft:10,
     marginTop : 20,
     borderWidth:0,
     width:Dimensions.get('window').width - 20,
-    backgroundColor:'#061c23',
+    backgroundColor:'white',
     borderWidth:1,
     flexDirection:'row',
+    borderRadius:3
   },
   segmentContainer:{
     height:30,
-    paddingTop:3,
+    paddingTop:0,
     paddingLeft:0,
     marginTop : 5,
     borderWidth:0,
-    marginBottom:0,
+    marginBottom:3,
     width:Dimensions.get('window').width - 20,
     backgroundColor:'#F4F0EE'
   },
   searchField:{
     marginLeft:7,
     flex:1,
-    color:'white',
+    color:'#e74c3c',
     fontSize:14,
   },
   moviesList: {
@@ -108,6 +110,15 @@ export const styles = StyleSheet.create({
 		marginLeft: 5,
 		fontSize: 12
 	},
+  sectionHeader: {
+     color: 'white',
+     padding: 10,
+     fontSize:15,
+     fontWeight:'500',
+     backgroundColor:'#e74c3c',
+     marginBottom:10,
+     opacity:0.9
+  },
   gridView: {
     paddingTop: 15,
     flex: 1,
@@ -155,10 +166,25 @@ export const styles = StyleSheet.create({
   },
   textAbove: {
     textAlign: 'center',
-    padding:5,
+    padding:3,
     backgroundColor: '#061c23',
     color:'white',
-    fontSize:10,
+    fontSize:12,
     height:20
+  },
+  tabStyle: {
+    paddingVertical: 5,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderColor: '#e74c3c',
+    borderWidth: 1,
+    backgroundColor: 'white',
+  },
+  activeTabStyle: {
+    backgroundColor: '#e74c3c'
+  },
+  tabTextStyle: {
+    color: '#e74c3c'
   },
 });

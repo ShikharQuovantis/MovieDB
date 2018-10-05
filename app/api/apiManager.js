@@ -15,10 +15,11 @@ const TMDB_API_KEY = "41a535e776713a8fef2ae156258ab9e3"
      })
      .then((response) => response.json())
      .then((responseJson) => {
+       /* converting the release date to release_year only in order to suffice the group by year option*/
        for (var i =0; i <  responseJson.results.length; i++) {
          (responseJson.results[i])['release_date'] = (responseJson.results[i])['release_date'].substring(0, 4)
        }
-
+       /* loading the data into corresponding arrays and dictionaries*/
        var sixPlusRatedmovies =  {
          title:'Rated above 6.5',
          data:[]
@@ -53,10 +54,7 @@ const TMDB_API_KEY = "41a535e776713a8fef2ae156258ab9e3"
        ];
 
        var movies = groupBy(responseJson.results, (c) => c.release_date);
-       var arrayOfMovies = []
-
        // for rating
-
        if (selectedIndex == 0) {
          for (var i =0; i <  responseJson.results.length; i++) {
            var movie =  responseJson.results[i]
@@ -72,8 +70,8 @@ const TMDB_API_KEY = "41a535e776713a8fef2ae156258ab9e3"
          }
          componentName.setState({sections:moviesByRating})
        }
+       // for year
        else if (selectedIndex == 1) {
-         // for year
          for (var i =0; i <  responseJson.results.length; i++) {
            var movie =  responseJson.results[i]
            if(movie["release_date"] > 2000) {
