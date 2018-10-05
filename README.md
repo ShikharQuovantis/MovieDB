@@ -1,6 +1,6 @@
 **MovieDB: A React Native app which uses the TMDb movie database**
 
-This sample React Native app allows a user to search a movie by its name, and it uses The Movie Database (www.themoviedb.org) for it. The user can also group the search results by 'Ratings' or 'Year range' in which the movies are released respectively.
+This sample React Native app allows a user to search a movie by its name, and it uses The Movie Database (www.themoviedb.org) for it.The grid layout is responsive and manages accordingly to the iPhone Screen sizes(2 columns in iPhone X and 3 columns in iPhone Plus series). The user can also group the search results by 'Ratings' or 'Year range' in which the movies are released respectively.
 
 **Installation:**
 
