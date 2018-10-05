@@ -137,39 +137,4 @@ export default class Search extends Component {
     onRowTap = (item) => {
       this.props.navigation.navigate('MovieDetails', item)
     }
-  /*<Text style={styles.itemName}>{item.name}</Text>
-  <Text style={styles.itemCode}>{item.code}</Text>*/
-
-  /*renderRow = ({item}) => {
-    return (
-			<View style={styles.cardContainer}>
-
-					<View style={styles.card}>
-						<Image source={{uri: API_CONSTANTS.POSTER_PATH_BASE_URL + item[API_CONSTANTS.POSTER_PATH]}} style={styles.cardImage}/>
-						<View style={styles.cardDetails}>
-							<Text
-								style={styles.cardTitle}
-								numberOfLines={3}>
-								{item[API_CONSTANTS.TITLE]}
-							</Text>
-							<View style={styles.cardGenre}>
-								<Text style={styles.cardGenreItem}>{item[API_CONSTANTS.RELEASE_DATE].substring(0, 4)}</Text>
-							</View>
-							<View style={styles.cardNumbers}>
-								<View style={styles.cardStar}>
-                  <Image source={require('../Resources/images/star.png')}/>
-									<Text style={styles.cardStarRatings}>{" " + item[API_CONSTANTS.VOTE_AVERAGE]}</Text>
-								</View>
-								<Text style={styles.cardRunningHours} />
-							</View>
-							<Text style={styles.cardDescription} numberOfLines={3}>
-								{item[API_CONSTANTS.OVERVIEW]}
-							</Text>
-						</View>
-					</View>
-
-			</View>
-		);
-  }*/
-
 }
